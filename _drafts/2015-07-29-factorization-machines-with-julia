@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "Factorization Machines with Julia"
+date:   2015-07-29
+categories: data_science julia 
+---
+
+
+
+
+
+
+# First version of Factorized Machines with GD
+
+I can confess to many Julia performance mistakes that I made in first version. But still, I wanted to know the performance of such dummy implementation is, and compare the results vs libfm and pyFM before going to optimize the code.
+
+## Main sins of first implementation:
+ - iteration over all elements in sparse matrix
+
+    for i in 1:lenght(x)
+        if x[i] != 0.0
+            #do smth
+        end
+    end
+
+
+ - while processing matrices I use approach of processing it row by row. Just like You do in Scala/Python/C. But in Julia data are stored in a columnar way ( more like R and 
+
+INFO: Running tests on ml-100k dataset...
+INFO: Train dim: (90570,2623)
+INFO: Test dim: (9430,2072)
+INFO: Training Factorization Machines with GD...
+INFO: Training dataset size: 90570
+INFO: Target min: 1.0
+INFO: Target max: 5.0
+INFO: Iteration number: 10
+INFO: Alpha: 0.01
+INFO: [GD - Iteration 1] Start...
+INFO: Evaluation - fmPredict...
+elapsed time: 53.296767447 seconds (1949058272 bytes allocated, 2.22% gc time)
+INFO: Evaluation - fmPredict ended.
+elapsed time: 53.317232922 seconds (1950869924 bytes allocated, 2.22% gc time)
+INFO: [GD - Iteration 1] RMSE: 1.1317307293971466
+elapsed time: 132.015493886 seconds (3899205360 bytes allocated, 1.76% gc time)
+INFO: [GD - Iteration 1] End.
+INFO: [GD - Iteration 2] Start...
+INFO: Evaluation - fmPredict...
+elapsed time: 60.831896358 seconds (1949058272 bytes allocated, 2.26% gc time)
+INFO: Evaluation - fmPredict ended.
+elapsed time: 60.832302593 seconds (1950509800 bytes allocated, 2.26% gc time)
+INFO: [GD - Iteration 2] RMSE: 1.1308193260666493
+elapsed time: 145.779622054 seconds (3898845236 bytes allocated, 1.76% gc time)
+INFO: [GD - Iteration 2] End.
+INFO: [GD - Iteration 3] Start...
+INFO: Evaluation - fmPredict...
+elapsed time: 47.216099547 seconds (1949058272 bytes allocated, 2.25% gc time)
+INFO: Evaluation - fmPredict ended.
+elapsed time: 47.216532348 seconds (1950509800 bytes allocated, 2.25% gc time)
+INFO: [GD - Iteration 3] RMSE: 1.1294601047540256
+elapsed time: 125.26350191 seconds (3898845236 bytes allocated, 1.74% gc time)
+INFO: [GD - Iteration 3] End.
